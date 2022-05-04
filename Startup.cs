@@ -28,13 +28,11 @@ namespace APIProject
         public void ConfigureServices(IServiceCollection services)
         {
 
-            // services.AddControllers();
-            // services.AddSwaggerGen(c =>
-            // {
-            //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "APIProject", Version = "v1" });
-            // });
-
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "APIProject", Version = "v1" });
+            });
 
             // injects dependency into the controller
             services.AddScoped<ICommanderRepo, MockCommanderRepo>();
