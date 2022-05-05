@@ -11,6 +11,12 @@ namespace APIProject.Data
         {
             _context = context;
         }
+
+        public void CreateCommand(Command cmd)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<Command> GetAllCommands()
         {
             return _context.Commands.ToList();
@@ -19,6 +25,11 @@ namespace APIProject.Data
         public Command GetCommandById(int id)
         {
             return _context.Commands.FirstOrDefault(p => p.Id == id);
+        }
+
+        public bool SaveChanges()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

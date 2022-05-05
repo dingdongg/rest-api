@@ -5,6 +5,11 @@ namespace APIProject.Data
 {
     public class MockCommanderRepo : ICommanderRepo
     {
+        public void CreateCommand(Command cmd)
+        {
+            throw new System.NotImplementedException();
+        }
+
         // fake hard-coded data for testing the repository
         public IEnumerable<Command> GetAllCommands()
         {
@@ -40,6 +45,11 @@ namespace APIProject.Data
                 Line="Boil water", 
                 Platform="Kettle & pan"
             };
+        }
+
+        public bool SaveChanges()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
