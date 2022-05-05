@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace APIProject.DTOs
 {
     public class CommandCreateDTO
@@ -6,10 +8,14 @@ namespace APIProject.DTOs
         // the database; the other 3 fields must still be supplied by the HTTP request
         // public int Id { get; set; }
 
+        [Required]
+        [MaxLength(250)]
         public string HowTo { get; set; }
 
+        [Required]
         public string Line { get; set; }
 
+        [Required]
         public string Platform { get; set; }
     }
 }
