@@ -10,6 +10,11 @@ namespace APIProject.Data
             throw new System.NotImplementedException();
         }
 
+        public void DeleteCommand(Command cmd)
+        {
+            throw new System.NotImplementedException();
+        }
+
         // fake hard-coded data for testing the repository
         public IEnumerable<Command> GetAllCommands()
         {
