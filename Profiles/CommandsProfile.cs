@@ -8,7 +8,10 @@ namespace APIProject.Profiles
     {
         public CommandsProfile()
         {
+            // Mapping from a model-level Command object to a read DTO
             CreateMap<Command, CommandReadDTO>();
+            // Mapping from a created DTO to the model-level Command object
+            CreateMap<CommandCreateDTO, Command>();
         }
     }
 }
