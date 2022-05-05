@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using APIProject.Models;
@@ -14,7 +15,12 @@ namespace APIProject.Data
 
         public void CreateCommand(Command cmd)
         {
-            throw new System.NotImplementedException();
+            if (cmd == null)
+            {
+                throw new ArgumentNullException(nameof(cmd));
+            }
+
+            _context.Commands.Add(cmd);
         }
 
         public IEnumerable<Command> GetAllCommands()
@@ -29,7 +35,9 @@ namespace APIProject.Data
 
         public bool SaveChanges()
         {
-            throw new System.NotImplementedException();
+            // When data is changed via the DB context,
+            // changes aren't saved in the database unless this method is called
+            return _context.SaveChanges() >= 0;
         }
     }
 }
