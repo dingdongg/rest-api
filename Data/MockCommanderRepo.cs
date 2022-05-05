@@ -6,7 +6,7 @@ namespace APIProject.Data
     public class MockCommanderRepo : ICommanderRepo
     {
         // fake hard-coded data for testing the repository
-        public IEnumerable<Command> GetAppCommands()
+        public IEnumerable<Command> GetAllCommands()
         {
             var commands = new List<Command> {
                 new Command { 
