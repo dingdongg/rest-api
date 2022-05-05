@@ -8,6 +8,9 @@ namespace APIProject.DTOs
         // the database; the other 3 fields must still be supplied by the HTTP request
         // public int Id { get; set; }
 
+        // data annotations added to allow server to throw 400 error codes,
+        // in cases where the JSON body of the HTTP POST request is incorrectly formatted
+
         [Required]
         [MaxLength(250)]
         public string HowTo { get; set; }

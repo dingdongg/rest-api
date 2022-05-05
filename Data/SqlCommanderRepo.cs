@@ -39,5 +39,11 @@ namespace APIProject.Data
             // changes aren't saved in the database unless this method is called
             return _context.SaveChanges() >= 0;
         }
+
+        public void UpdateCommand(Command cmd)
+        {
+            // Nothing !
+            // Updating the command is taken care of by the DB context
+        }
     }
 }
