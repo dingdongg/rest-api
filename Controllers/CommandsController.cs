@@ -18,7 +18,6 @@ namespace APIProject.Controllers
             _repository = repo;
         }
 
-        // private readonly MockCommanderRepo _repository = new MockCommanderRepo();
         // GET api/commands
         [HttpGet]
         public ActionResult<IEnumerable<Command>> GetAllCommands()
@@ -33,7 +32,11 @@ namespace APIProject.Controllers
         public ActionResult<Command> GetCommandById(int id)
         {
             var commandItem = _repository.GetCommandById(id);
-            return Ok(commandItem);
+            if (commandItem != null)
+            {
+                return Ok(commandItem);
+            }
+            return NotFound();
         }
     }
 }
