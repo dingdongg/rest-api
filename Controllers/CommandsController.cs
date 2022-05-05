@@ -3,6 +3,7 @@ using APIProject.Data;
 using APIProject.DTOs;
 using APIProject.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIProject.Controllers
@@ -84,6 +85,35 @@ namespace APIProject.Controllers
             {
                 return NotFound();
             }
+        }
+
+        // PATCH api/commands/{id}
+        [HttpPatch("{id}")]
+        public ActionResult PartialCommandUpdate(int id, JsonPatchDocument<CommandUpdateDTO> patchDoc) 
+        {
+            // check whether specified resource exists or not
+            var commandModelFromRepo = _repository.GetCommandById(id);
+            if (commandModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            // new CommandUpdateDTO with contents fetched from the repository
+            var commandToPatch = _mapper.Map<CommandUpdateDTO>(commandModelFromRepo);
+            // applies the patch to the CommandUpdateDTO object
+            patchDoc.ApplyTo(commandToPatch, ModelState);
+
+            if (!TryValidateModel(commandToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            // update the repository with the new patches
+            _mapper.Map(commandToPatch, commandModelFromRepo);
+            _repository.UpdateCommand(commandModelFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
         }
     }
 }

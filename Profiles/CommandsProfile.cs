@@ -14,6 +14,8 @@ namespace APIProject.Profiles
             CreateMap<CommandCreateDTO, Command>();
             // Mapping from a updated DTO to the model-level Command object
             CreateMap<CommandUpdateDTO, Command>();
+            // Mapping from a model-level Command object to the updated DTO
+            CreateMap<Command, CommandUpdateDTO>();
         }
     }
 }
