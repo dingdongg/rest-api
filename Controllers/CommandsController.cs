@@ -56,5 +56,34 @@ namespace APIProject.Controllers
             // return 201 code
             return CreatedAtRoute(nameof(GetCommandById), new {Id=commandReadDto.Id}, commandReadDto);
         }
+
+        // UPDATE api/commands/{id}
+        [HttpPut("{id}")]
+        public ActionResult UpdateCommand(int id, CommandUpdateDTO updateDTO) 
+        {
+            // check whether specified resource exists or not
+            var commandModelFromRepo = _repository.GetCommandById(id);
+            if (commandModelFromRepo != null) 
+            {
+                // exists
+                // map from CommandUpdateDTO -> Command
+                // updates kept track of by the DB context
+                _mapper.Map(updateDTO, commandModelFromRepo);
+
+                // not needed in this case due to the fact that DB context will 
+                // automatically makes the changes, but still makes intuitive sense
+                // to have this method call. In the event that some other framework
+                // is used to design this API, implementation details may change
+                // and additional work will have to be exercised on UpdateCommand
+                // to give it actual functionality.
+                _repository.UpdateCommand(commandModelFromRepo);
+                _repository.SaveChanges();
+
+                return NoContent();
+            } else 
+            {
+                return NotFound();
+            }
+        }
     }
 }
