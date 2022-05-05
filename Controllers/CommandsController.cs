@@ -12,6 +12,7 @@ namespace APIProject.Controllers
     {
         private readonly ICommanderRepo _repository;
 
+        // constructor to inject dependency
         public CommandsController(ICommanderRepo repo)
         {
             _repository = repo;

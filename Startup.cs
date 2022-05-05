@@ -38,8 +38,11 @@ namespace APIProject
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "APIProject", Version = "v1" });
             });
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             // injects dependency into the controller
-            services.AddScoped<ICommanderRepo, MockCommanderRepo>();
+            // services.AddScoped<ICommanderRepo, MockCommanderRepo>();
+            services.AddScoped<ICommanderRepo, SqlCommanderRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
