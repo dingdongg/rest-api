@@ -33,3 +33,12 @@ In order to link the controller and the repository, I injected a dependency on `
 This increases the scalability of this API, as well as its flexibility in choosing which implementation (eg. SQL Server, Oracle, etc.) to stick with.
 
 ### ***Data Transfer Objects***
+Sending HTTP responses back with raw, domain-level resources imposes a number of issues, such as transmission of irrelevant data and/or potential security issues.
+
+But more importantly, this introduces coupling. By sending domain-level data back to the client, I would be exposing my API's internal implementation details to the client, which violates the REST principle of client-server decoupling. My API should remain as a black box to my clients, and data transfer objects (DTOs) assisted with this decoupling.
+
+DTOs are also objects that are mapped from the domain-level data. They are created for the sole purposes of transmission to the client. They can be considered the "polished" versions of domain-level data, as they can omit/tweak certain resource attributes before being mapped, which allows sensitive/unnecessary information to be held securely within our API/database. The mapping from domain-level data to DTOs were done through the use of automappers.
+
+## Testing
+---
+Each API endpoint was thoroughly tested via Postman HTTP requests. SQL Server Express was also used to ensure that data was being stored correctly within our database.
